@@ -1,19 +1,25 @@
-import React from 'react';
-import SlotMaquina from './components/SlotMaquina';
-import Controles from './components/Controles';
-import Pago from './components/Pago';
+import "./App.css";
+import React, { useState } from 'react';
+import Slot from "./components/Slots";
 
-const App = () => {
+function App() {
+  const [spinning, setSpinning] = useState(false);
+
+  const handleSpin = () => {
+    setSpinning(true);
+
+    setTimeout(() => {
+      setSpinning(false);
+    }, 2000);  
+  };
+
   return (
-    <div className="container">
-      <h2 className="text-center text-light my-3 gold">
-        <i className="fab fa-phoenix-framework gold"></i> Slot Game
-      </h2>
-      <SlotMaquina />
-      <Controles />
-      <Pago />
+    <div className="slot-machine">
+      <Slot spinning={spinning} />
+      <button onClick={handleSpin} disabled={spinning}>Spin</button>
     </div>
   );
-};
+}
 
 export default App;
+
