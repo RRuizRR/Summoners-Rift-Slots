@@ -11,7 +11,7 @@ function Slot({ spinning, numRows = 5, numReels = 5 }) {
   useEffect(() => {
     if (!spinning) {
       
-      calculateWinnings(symbols);
+    
     }
   }, [spinning, symbols]);
 
@@ -24,22 +24,7 @@ function Slot({ spinning, numRows = 5, numReels = 5 }) {
   };
 
 
-  const calculateWinnings = async (reels) => {
-    try {
-      const response = await fetch('http://localhost:3001/calculate-winnings', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ reels })
-      });
-      const data = await response.json();
-      console.log('Ganancias obtenidas:', data.winnings);
-
-
-      setTotalWinnings(prevWinnings => prevWinnings + data.winnings);
-    } catch (error) {
-      console.error('Error calculating winnings:', error);
-    }
-  };
+ 
 
   return (
     <div className="slot-machine">

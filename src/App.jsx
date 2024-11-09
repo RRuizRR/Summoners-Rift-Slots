@@ -1,25 +1,24 @@
 import "./App.css";
+import './index.css'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+
 import React, { useState } from 'react';
-import Slot from "./components/Slots";
+//context
+import { User } from "../context/UserContext";
 
+
+//Views
+import {SlotMain} from "../views/SlotMain.jsx";
 function App() {
-  const [spinning, setSpinning] = useState(false);
-
-  const handleSpin = () => {
-    setSpinning(true);
-
-    setTimeout(() => {
-      setSpinning(false);
-    }, 2000);  
-  };
-
   return (
-    <div className="slot-machine">
-      <Slot spinning={spinning} />
-      <button onClick={handleSpin} disabled={spinning}>Spin</button>
-    </div>
+      <BrowserRouter>
+          <User>  
+              <Routes>
+                  <Route path="/slot" element={<SlotMain />} />  
+              </Routes>
+          </User>
+      </BrowserRouter>
   );
 }
 
 export default App;
-
