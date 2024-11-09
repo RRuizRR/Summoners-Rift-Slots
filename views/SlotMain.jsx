@@ -41,7 +41,7 @@ export function SlotMain() {
                
           marginBottom : '200px'       
       }}>
-          <button onClick={console.log(users)} style={{backgroundColor: "black" }} disabled={spinning}>
+          <button onClick={handleSpin} style={{backgroundColor: "black" }} disabled={spinning}>
               Spin
           </button>
       </div>
