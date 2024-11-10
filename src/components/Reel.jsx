@@ -40,7 +40,7 @@ function Reel({ spinning }) {
   }, [spinning]);
 
   return (
-    <div className="reel">
+    <div className="reel" style={{ width: '100px', height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <img src={currentSymbol} alt="slot symbol" style={{ width: '100px', height: '100px' }} />
     </div>
   );

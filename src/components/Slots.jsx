@@ -7,14 +7,11 @@ function Slot({ spinning, numRows = 5, numReels = 5 }) {
   );
   const [totalWinnings, setTotalWinnings] = useState(0); 
 
-
   useEffect(() => {
     if (!spinning) {
-      
-      calculateWinnings(symbols);
+      // Aquí puedes agregar lógica para manejar las animaciones o actualizaciones
     }
   }, [spinning, symbols]);
-
 
   const fetchSymbols = () => {
     const newSymbols = Array.from({ length: numRows }, () => 
@@ -23,31 +20,23 @@ function Slot({ spinning, numRows = 5, numReels = 5 }) {
     setSymbols(newSymbols);
   };
 
-
-  const calculateWinnings = async (reels) => {
-    try {
-      const response = await fetch('http://localhost:3001/calculate-winnings', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ reels })
-      });
-      const data = await response.json();
-      console.log('Ganancias obtenidas:', data.winnings);
-
-
-      setTotalWinnings(prevWinnings => prevWinnings + data.winnings);
-    } catch (error) {
-      console.error('Error calculating winnings:', error);
-    }
-  };
-
   return (
-    <div className="slot-machine">
-      <div className="winnings">
+    <div className="slot-machine" style={{ display: 'flex', flexDirection: 'column', gap: '9px', alignItems: 'center' }}>
+      <div className="winnings" style={{ marginBottom: '20px' }}>
         <h2>Total de Ganancias: {totalWinnings}</h2>
       </div>
+
+      {/* Renderiza las filas de reels */}
       {Array.from({ length: numRows }).map((_, rowIndex) => (
-        <div className="row" key={rowIndex}>
+        <div 
+          className="row" 
+          key={rowIndex} 
+          style={{ 
+            display: 'flex', 
+            gap: '60px', // Espacio entre los reels de la fila
+            justifyContent: 'center', // Centra los reels en la fila
+          }}
+        >
           {Array.from({ length: numReels }).map((_, reelIndex) => (
             <Reel symbol={symbols[rowIndex][reelIndex]} spinning={spinning} key={reelIndex} />
           ))}
