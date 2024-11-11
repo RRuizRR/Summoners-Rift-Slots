@@ -21,7 +21,7 @@ function Slot({ spinning, numRows = 5, numReels = 5 }) {
   };
 
   return (
-    <div className="slot-machine" style={{ display: 'flex', flexDirection: 'column', gap: '9px', alignItems: 'center' }}>
+    <div className="slot-machine" style={{ display: 'flex', flexDirection: 'column', gap: '2px', alignItems: 'center' }}>
       <div className="winnings" style={{ marginBottom: '20px' }}>
         <h2>Total de Ganancias: {totalWinnings}</h2>
       </div>
@@ -33,7 +33,7 @@ function Slot({ spinning, numRows = 5, numReels = 5 }) {
           key={rowIndex} 
           style={{ 
             display: 'flex', 
-            gap: '60px', // Espacio entre los reels de la fila
+            gap: '70px', // Espacio entre los reels de la fila
             justifyContent: 'center', // Centra los reels en la fila
           }}
         >
