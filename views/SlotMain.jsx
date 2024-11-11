@@ -23,31 +23,31 @@ export function SlotMain() {
       {/* Fondo general */}
       <div
         style={{
-          width: '100vw',  // Ocupa toda la pantalla
-          height: '100vh', // Ocupa toda la pantalla
+          width: '100vw',
+          height: '100vh',
           backgroundImage: `url('src/img/slot_base.png')`,
-          backgroundSize: '100% 100%', // Asegura que el fondo cubra toda la pantalla
+          backgroundSize: '100% 100%',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           position: 'absolute',
           top: 0,
           left: 0,
-          zIndex: -1, // Asegura que el fondo esté en el fondo y no interfiera con el contenido
+          zIndex: -1,
         }}
       ></div>
 
-      {/* Contenedor de la máquina tragamonedas, redimensionado usando transform */}
+      {/*Contenedor de la máquina tragamonedas*/}
       <div
         className="slot-machine"
         style={{
           display: 'flex',
-          width: '70vw', // Ancho original
-          height: '105vh', // Alto original
+          width: '70vw',
+          height: '105vh',
           position: 'absolute',
-          left: '37vw', // Mueve el contenedor a la derecha
-          top: '16vh',  // Ajusta la distancia desde la parte superior
-          transform: 'scale(0.7)', // Redimensiona el contenedor al 50% de su tamaño original
-          transformOrigin: 'top left', // Redimensiona desde la esquina superior izquierda
+          left: '37vw',
+          top: '17vh',
+          transform: 'scale(0.7)',
+          transformOrigin: 'top left',
         }}
       >
         <Slot spinning={spinning} />

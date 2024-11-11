@@ -1,0 +1,59 @@
+/* Reel.css */
+.reel-container {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .symbols {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  
+  .symbol {
+    width: 100px;
+    height: 100px;
+    margin: 5px 0;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    z-index: 1;
+  }
+  
+  .symbol.spinning {
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
+  }
+
+  .spinning {
+    animation: spin 3s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: translateY(0);
+    }
+    70% {
+      transform: translateY(-200%);
+    }
+    90% {
+      transform: translateY(-150%);
+    }
+    100% {
+      transform: translateY(-100%);
+    }
+  }
+  
+  @keyframes stopSpin {
+    0% {
+      transform: translateY(0);
+    }
+    80% {
+      transform: translateY(-90%);
+    }
+    100% {
+      transform: translateY(-100%);
+    }
+  }
+  
