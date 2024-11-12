@@ -69,21 +69,24 @@ const SlotMachine = () => {
       setMessage("No tienes suficientes créditos.");
       return;
     }
-
-    // Resta créditos
-    setCredits(credits - 750);
-
+  
+    // Resta inmediatamente los créditos al girar
+    setCredits((prevCredits) => prevCredits - 750);
+  
     // Genera un nuevo tablero de símbolos aleatorios
     const newGrid = Array.from({ length: 5 }, () =>
       Array.from({ length: 5 }, () => getRandomSymbol())
     );
     setGrid(newGrid);
-
-    // Verifica combinaciones ganadoras
+  
+    // Verifica combinaciones ganadoras y suma créditos ganados
     const winnings = checkForWins(newGrid);
-    setCredits(credits + winnings);
+    setCredits((prevCredits) => prevCredits + winnings);
+  
+    // Muestra mensaje de ganancia o sin ganancia
     setMessage(winnings > 0 ? `¡Ganaste ${winnings} créditos!` : "Sin ganancia.");
   };
+  
   
   return (
     <div style={{ textAlign: 'center', padding: '10xp' }}>
