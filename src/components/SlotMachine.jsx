@@ -25,44 +25,71 @@ const symbols = [
 ];
 
 const SlotMachine = () => {
-  const [credits, setCredits] = useState(10000);
+  const [credits, setCredits] = useState(20000);
   const [grid, setGrid] = useState(Array.from({ length: 5 }, () => Array(5).fill(null)));
   const [message, setMessage] = useState('');
 
   // Función para generar una imagen aleatoria
   const getRandomSymbol = () => symbols[Math.floor(Math.random() * symbols.length)];
-
-  // Función para verificar combinaciones ganadoras
+  const winningCombinations = [
+    // Aquí defines combinaciones ganadoras especiales
+    ["azul", "filo", "liandry"], // Por ejemplo: combinación de "azul", "filo" y "liandry"
+    ["vayne", "viego", "draven"], // Otra combinación especial
+    ["filo", "espejo", "trinity","liandry","rabadon","mejai"],
+    ["rojo", "azul", "verde"],
+    ["filo", "rabadon", "espejo"],
+    ["haste", "parte", "parte"],
+    // Añade más combinaciones especiales según tus reglas
+  ];
+  
   const checkForWins = (newGrid) => {
     let totalWinnings = 0;
-
-    // Comprobar filas
+  
+    // Recorre filas y columnas para buscar 3 o más símbolos iguales
     for (let row = 0; row < 5; row++) {
       for (let col = 0; col < 3; col++) {
+        // Verifica si hay 4 o 5 símbolos iguales en fila
         if (
           newGrid[row][col] === newGrid[row][col + 1] &&
           newGrid[row][col + 1] === newGrid[row][col + 2]
         ) {
-          totalWinnings += 1000;
+          let count = 3;
+          if (col + 3 < 5 && newGrid[row][col + 2] === newGrid[row][col + 3]) count = 4;
+          if (col + 4 < 5 && newGrid[row][col + 3] === newGrid[row][col + 4]) count = 5;
+  
+          // Aplica un multiplicador según la cantidad de símbolos iguales
+          totalWinnings += (count >= 4 ? 1000 * 4 : 1000); // Multiplica x4 si hay 4 o más símbolos iguales
         }
       }
     }
-
-    // Comprobar columnas
+  
     for (let col = 0; col < 5; col++) {
       for (let row = 0; row < 3; row++) {
+        // Verifica si hay 4 o 5 símbolos iguales en columna
         if (
           newGrid[row][col] === newGrid[row + 1][col] &&
           newGrid[row + 1][col] === newGrid[row + 2][col]
         ) {
-          totalWinnings += 1000;
+          let count = 3;
+          if (row + 3 < 5 && newGrid[row + 2][col] === newGrid[row + 3][col]) count = 4;
+          if (row + 4 < 5 && newGrid[row + 3][col] === newGrid[row + 4][col]) count = 5;
+  
+          // Aplica un multiplicador según la cantidad de símbolos iguales
+          totalWinnings += (count >= 4 ? 1000 * 4 : 1000); // Multiplica x4 si hay 4 o más símbolos iguales
         }
       }
     }
-
+  
+    // Verifica las combinaciones especiales
+    for (const combination of winningCombinations) {
+      const foundCombo = combination.every(symbol =>
+        newGrid.flat().includes(symbol)
+      );
+      if (foundCombo) totalWinnings += 5000; // Ajusta el valor de ganancia de combinaciones especiales
+    }
+  
     return totalWinnings;
   };
-
   // Función de girar
   const handleSpin = () => {
     if (credits < 750) {
@@ -72,7 +99,6 @@ const SlotMachine = () => {
   
     // Resta inmediatamente los créditos al girar
     setCredits((prevCredits) => prevCredits - 750);
-  
     // Genera un nuevo tablero de símbolos aleatorios
     const newGrid = Array.from({ length: 5 }, () =>
       Array.from({ length: 5 }, () => getRandomSymbol())
@@ -101,7 +127,7 @@ const SlotMachine = () => {
           ))
         )}
      
-      <button onClick={handleSpin} style={{ backgroundColor: "transparent",marginTop:'5vh',marginBottom:'20vh',marginLeft:'13vh',borderRadius: '50%',width:'30mm',height: '30mm'}} disabled={credits < 750&&credits-750}>
+      <button onClick={handleSpin} style={{ backgroundColor: "transparent",marginTop:'5vh',marginBottom:'20vh',marginLeft:'13vh',borderRadius: '50%',width:'31mm',height: '33mm',borderColor:'transparent'}} disabled={credits < 750&&credits-750}>
       </button>
       </div>
     </div>
